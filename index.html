@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style type="text/css">
+        #top {
+            padding: 30px;
+            border: solid 1px #f2f2f2;
+            margin: 10px;
+            background: #f2f2f2;
+        }
+        #banner1 {
+            visibility: hidden;
+            margin: 10px;
+        }
+    </style>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+    var handler = function()
+    {
+                        //alert("Hello " + $('#name1').val());
+                        name1 = $('#name1').val();
+                        name2 = $('#name2').val();
+                        console.log(name1 + "and" + name2 + "are Ready");
+                        if (name2 == "" || name1 == "") {
+                            alert("Please enter both Name ");
+                        }
+                        else {
+                            $.ajax({
+                                url: "http://127.0.0.1:5000/" + name1 + '/' + name2,
+                                type: "GET",
+                                crossDomain: true,
+                                dataType: "json",
+                                success: function (response) {
+                                    response = response.char;
+                                    
+                                    switch(response){
+                                        case 'F':
+                                        result =  "The Relationship between you is FRIENDS";
+                                        break;
+                                        case 'L':
+                                        result = "The Relationship between you is LOVE";
+                                        break;
+                                        case 'A':
+                                        result = "The Relationship between you is AFFECTION";
+                                        break;
+                                        case 'M':
+                                        result = "The Relationship between you is MARRIAGE";
+                                        break;
+                                        case 'E':
+                                        result = "The Relationship between you is ENIEMES";
+                                        break;
+                                        case 'S':
+                                        result = "The Relationship between you is SIBLINGS";
+                                        break;
+                                    };
+                                    $('#banner1').css('visibility','visible');
+                                    $('#banner1').html(result);
+                                    console.log(response);
+                                },
+                                error: function (xhr, status) {
+                                    alert("We are eperienceing a problem.. please comeback laters");
+                                }
+                            });
+                        }
+                    };
+        $(document).ready(
+            function () {
+                console.log("Document is Ready");
+                $("#name2,#name1").keypress(function(event){
+                    if (event.which == 13){
+                        handler();
+                    }
+                }
+                );
+                $('#first_button').click(handler);
+            }
+        );
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">FLAMES</a>
+    </nav>
+    <div id="top">
+        <div id="space">
+            Hello
+        </div>
+        <input type="text" id="name1" />
+        <input type="text" id="name2" />
+        <button id="first_button" class="btn btn-primary">Test Button</button>
+        <div id="banner1" class="alert alert-primary" role="alert">your result will be printed here</div>
+    </div>
+
+
+</body>
+
+</html>
