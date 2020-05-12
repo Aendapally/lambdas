@@ -4,6 +4,7 @@ import urllib.request
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import json
+import eesdk
 
 app = Flask(__name__)
 CORS(app)
@@ -15,9 +16,11 @@ ALLOWED_EXTENSIONS = set(['csv'])
 
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-@app.route('/')
-def upload_form():
-	return render_template('index-wip.html')
+@app.route('/getaccounts')
+def hello(event_id, token, module_id):
+	print(request)
+    sdk = eesdk.EESDK("https://api.eventengine.run", token, event_id, module_id)
+    return json.dumps(sdk.get_all_teams())
 
 @app.route('/uploadFile', methods=['GET','POST'])
 def upload_file():
