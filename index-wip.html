@@ -22,11 +22,10 @@
                         emailfile = $('#email').val();
                         console.log(eventfile + "and" + emailfile + "are Ready");
                         if (eventfile == "" || emailfile == "") {
-                            alert("Please enter both Name ");
+                            alert("Please enter both files ");
                         }
                         else{
                             var form_data = new FormData();
-
                                form_data.append("files[]", document.getElementById('event'));
                                console.log(form_data)
                                form_data.append("files[]", document.getElementById('email'));
@@ -68,11 +67,16 @@
                 </p>
                 
                 </div>
-            <label for="emailfile">Upload csv file downloaded from Event Engine:</label>
+                <form enctype="multipart/form-data">
+                    <input name="file" type="file" id="event" />
+                    <input name="file" type="file" id="email"/>
+                    <input type="button" value="Upload" id="UploadButton"/>
+                </form>
+            <!-- <label for="emailfile">Upload csv file downloaded from Event Engine:</label>
             <input type="file" id="event" name="EventEngine" />
             <label for="emailfile">Upload csv file with participants email addresses:</label>
             <input type="file" id="email" name="emailfile" />
-            <button id="UploadButton" class="btn btn-primary">Upload Files</button>
+            <button id="UploadButton" class="btn btn-primary">Upload Files</button> -->
         </div>
     
     </body>

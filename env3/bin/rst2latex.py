@@ -1,4 +1,4 @@
-#!/Users/vijayakumaryarrampalli/Documents/Code/Lambdas/env3/bin/python3
+#!/Users/aaendapa/Documents/Code/lambdas/env3/bin/python
 
 # $Id: rst2latex.py 5905 2009-04-16 12:04:49Z milde $
 # Author: David Goodger <goodger@python.org>

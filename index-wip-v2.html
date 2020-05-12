@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style type="text/css">
+        #top {
+            padding: 30px;
+            border: solid 1px #f2f2f2;
+            margin: 10px;
+            background: #f2f2f2;
+        }
+
+        #UploadButton {
+            margin: 10px;
+        }
+    </style>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+        var upload = function(p){
+            $.ajax({
+                url: 'http://127.0.0.1:5000/uploadFile',
+                type: 'POST',
+                data: new FormData($('form')[p]),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    console.log(data);
+                },
+            });
+        };
+        var handler = function () {
+            // AJAX request
+            console.log($('form')[0]);
+            upload(0);
+        };
+        $(document).ready(
+            function () {
+                console.log("Document is Ready");
+                $('#UploadButton').click(handler);
+            }
+        );
+    </script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">AWS EventEngine Account Mapping</a>
+    </nav>
+    <div id="top">
+        <div>
+            <p>
+                In order to use this you need two files: <br />
+                1. csv file that you downloaded from Event Engine portal with account hashs. <br />
+                2. csv file with all the registered users email addresses
+            </p>
+
+        </div>
+        <form enctype="multipart/form-data">
+            <input name="file" type="file" id="event" />
+            <input name="file" type="file" id="email" />
+            <input type="button" value="Upload" id="UploadButton" />
+        </form>
+        
+        <!-- <label for="emailfile">Upload csv file downloaded from Event Engine:</label>
+            <input type="file" id="event" name="EventEngine" />
+            <label for="emailfile">Upload csv file with participants email addresses:</label>
+            <input type="file" id="email" name="emailfile" />
+            <button id="UploadButton" class="btn btn-primary">Upload Files</button> -->
+    </div>
+
+</body>
+
+</html>

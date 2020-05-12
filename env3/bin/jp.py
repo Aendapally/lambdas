@@ -1,4 +1,4 @@
-#!/Users/vijayakumaryarrampalli/Documents/Code/Lambdas/env3/bin/python3
+#!/Users/aaendapa/Documents/Code/lambdas/env3/bin/python
 
 import sys
 import json

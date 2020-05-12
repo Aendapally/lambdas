@@ -3,10 +3,11 @@ import os
 import urllib.request
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
+import json
 
 app = Flask(__name__)
 CORS(app)
-UPLOAD_FOLDER = '/Users/vijayakumaryarrampalli/Documents/Code/Lambdas/files'
+UPLOAD_FOLDER = '/Users/aaendapa/Documents/Code/lambdas/files'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "secret key"
 
@@ -20,21 +21,31 @@ def upload_form():
 
 @app.route('/uploadFile', methods=['GET','POST'])
 def upload_file():
+	print(request.files)
 	if request.method == 'POST':
-        isthisFile=request.files.get('file')
-        print(isthisFile)
-        print(isthisFile.filename)
-        isthisFile.save("./"+isthisFile.filename)
-		flash('Files successfully uploaded')
-		return redirect('/')
-        # # check if the post request has the files part
-		# files = request.files.getlist('form_data')
-		# for file in files:
-		# 	if file and allowed_file(file.filename):
-		# 		filename = secure_filename(file.filename)
-		# 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        # isthisFile=request.files.get('file')
+        # print(isthisFile)
+        # print(isthisFile.filename)
+        # isthisFile.save("./"+isthisFile.filename)
 		# flash('Files successfully uploaded')
-		# return redirect('/')
+		# 
+        # check if the post request has the files part
+		files = request.files
+		for f in files.items(multi=True):
+			print(f)
+			print(f[1])
+			k = f[1]
+			if k and allowed_file(k.filename):
+				filename = secure_filename(k.filename)
+				k.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		print(files)
+		return('Success')
+		# for file in files:
+		# 	f = file[1]
+		# 	print(f)
+		# 	if f and allowed_file(f.filename):
+		# 		filename = secure_filename(f.filename)
+		# 		f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 
 if __name__ == '__main__':
