@@ -8,7 +8,7 @@ import eesdk
 
 app = Flask(__name__)
 CORS(app)
-UPLOAD_FOLDER = '/Users/vijayakumaryarrampalli/Documents/Code/lambdas/files'
+UPLOAD_FOLDER = '/Users/aaendapa/Documents/Code/lambdas/files'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "secret key"
 
@@ -22,12 +22,12 @@ def hello():
     eventid = request.form['eventid']
     authtoken = request.form['authtoken']
     moduleid = request.form['moduleid']
-    print(eventid)
-    print(authtoken)
-    print(moduleid)
+    # print(eventid)
+    # print(authtoken)
+    # print(moduleid)
     sdk = eesdk.EESDK("https://api.eventengine.run", authtoken, eventid, moduleid)
     #print(sdk)
-    items =  json.dumps(sdk.get_all_teams())
+    items = (sdk.get_all_teams()[0]['team-hash'])
     print(items)
     return('Success')
 
