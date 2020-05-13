@@ -1,0 +1,5 @@
+# @app.route('/getaccounts')
+# def hello(event_id, token, module_id):
+# 	print(request)
+#     sdk = eesdk.EESDK("https://api.eventengine.run", token, event_id, module_id)
+#     return json.dumps(sdk.get_all_teams())

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style type="text/css">
+        #top {
+            padding: 30px;
+            border: solid 1px #f2f2f2;
+            margin: 10px;
+            background: #f2f2f2;
+        }
+        #UploadButton {
+            margin: 10px;
+        }
+    </style>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+        var uploadfile = function(){
+            $.ajax({
+                url: 'http://127.0.0.1:5000/uploadFile',
+                type: 'POST',
+                data: new FormData($('form'[1])),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    console.log(data);
+                },
+            });            
+        };
+        var handler = function(){
+            console.log($('form')[1]);
+            uploadfile()
+
+        };
+        $(document).ready(
+            function () {
+                console.log("Document is Ready");
+                $('#UploadButton').click(handler);
+            }
+        );
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">AWS EventEngine - Account Mapping</a>
+    </nav>
+    <div id="top">
+        <div>
+            <h4>Welcome to Event Engine account mapping. Here you can automate the account mapping to users who are registered to workshop... </h4>
+        </div>
+        <form id="sadetails" name="sadetails">
+            <div class="form-group">
+              <label for="amznemail">Amazon Email address</label>
+              <input type="email" class="form-control" id="amznemail" aria-describedby="emailHelp" placeholder="<alias>@amazon.com">
+              <small id="emailHelp" class="form-text text-muted">This is to sent you all the account details with user mapping</small>
+            </div>
+            <div class="form-group">
+              <label for="authtoken">Auth Token</label>
+              <input type="password" class="form-control" id="authtoken" placeholder="JWT Auth Token from EventEngine Portal">
+            </div>
+            <div class="form-group">
+                <label for="moduleid">Amazon Email address</label>
+                <input type="text" class="form-control" id="moduleid" aria-describedby="modulehelp" placeholder="You can find this in Event Engine portal">
+                <small id="emailHelp" class="form-text text-muted">Module Id (Cloud Formation Module) used to create account while creating Event.</small>
+              </div>
+        </form>
+        <form id="userdetails" name="userdetails">
+              <div class="user-group">
+                <label for="participantsemail">.csv file with participants email addresses or names</label>
+                <input type="file" class="form-control-file" id="participantsemail">
+              </div>
+            <button type="submit" id="UploadButton" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

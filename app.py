@@ -8,7 +8,7 @@ import eesdk
 
 app = Flask(__name__)
 CORS(app)
-UPLOAD_FOLDER = '/Users/aaendapa/Documents/Code/lambdas/files'
+UPLOAD_FOLDER = '/Users/vijayakumaryarrampalli/Documents/Code/lambdas/files'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "secret key"
 
@@ -16,11 +16,11 @@ ALLOWED_EXTENSIONS = set(['csv'])
 
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-@app.route('/getaccounts')
-def hello(event_id, token, module_id):
-	print(request)
-    sdk = eesdk.EESDK("https://api.eventengine.run", token, event_id, module_id)
-    return json.dumps(sdk.get_all_teams())
+# @app.route('/getaccounts')
+# def hello(event_id, token, module_id):
+# 	print(request)
+#     sdk = eesdk.EESDK("https://api.eventengine.run", token, event_id, module_id)
+#     return json.dumps(sdk.get_all_teams())
 
 @app.route('/uploadFile', methods=['GET','POST'])
 def upload_file():
