@@ -3,3 +3,6 @@
 # 	print(request)
 #     sdk = eesdk.EESDK("https://api.eventengine.run", token, event_id, module_id)
 #     return json.dumps(sdk.get_all_teams())
+
+
+https://dashboard.eventengine.run/login?hash=14c4f2b3b7c4
